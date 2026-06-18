@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveTube+</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+
+<header>
+    <h1>DriveTube+</h1>
+    <div class="search-container">
+        <input id="search" type="text" placeholder="Search directory assets...">
+    </div>
+</header>
+
+<div class="container">
+    <aside>
+        <h3>Library</h3>
+        <div class="btn-group">
+            <button class="active" data-mode="all" onclick="setMode('all')"><span>All Storage</span><span>📁</span></button>
+            <button data-mode="favorites" onclick="setMode('favorites')"><span>Favorites</span><span>★</span></button>
+            <button data-mode="history" onclick="setMode('history')"><span>History</span><span>⏱</span></button>
+        </div>
+
+        <h3>Categories</h3>
+        <div id="categories" class="btn-group"></div>
+    </aside>
+
+    <main>
+        <div id="grid"></div>
+    </main>
+</div>
+
+<div id="player" class="hidden">
+    <div class="playerBox">
+        <div class="player-header">
+            <h2 id="title">Console Output</h2>
+            <button id="close" aria-label="Terminate player instance">✖</button>
+        </div>
+        <div class="iframe-container">
+            <iframe id="frame" allowfullscreen allow="autoplay"></iframe>
+        </div>
+    </div>
+</div>
+
+<script src="./script.js"></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("./sw.js").catch(err => {
+                console.log("SW Registration deferred: ", err);
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
